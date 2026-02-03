@@ -1,0 +1,657 @@
+/* ============================
+  Exhibit Theme (卒業展示パネル風)
+  - くすみピンク×ターコイズ
+  - 方眼グリッド背景
+  - 角丸カード / ステッカー見出し
+============================ */
+
+/* ----------------------------
+  1) Palette / tokens
+---------------------------- */
+:root{
+  --bg: #f7efe8;
+  --grid: rgba(222,149,142,.18);
+  --text: #1b1b1b;
+  --muted: rgba(27,27,27,.65);
+
+  --pink: #d98a83;
+  --teal: #39aeb6;
+  --teal-deep:#2a8f96;
+  --cream:#fff7ef;
+
+  --shadow: 0 10px 0 rgba(0,0,0,.12);
+  --shadow-soft: 0 8px 24px rgba(0,0,0,.10);
+
+  --r-xl: 22px;
+  --r-pill: 999px;
+
+  --max: 980px;
+  --col: min(var(--max), 100%);
+}
+
+/* ----------------------------
+  2) Base / background grid
+---------------------------- */
+body{
+  margin: 0;
+  padding: 0;
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.75;
+
+  background:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    linear-gradient(0deg, var(--bg), var(--bg));
+  background-size: 40px 40px, 40px 40px, auto;
+}
+
+/* ページの“列”を統一（index/uno共通） */
+body > *{
+  width: var(--col);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 18px;
+  padding-right: 18px;
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+/* ----------------------------
+  3) Headings / text
+---------------------------- */
+h1{
+  margin-top: 34px;
+  margin-bottom: 22px;
+  padding: 14px 18px;
+  border-radius: var(--r-xl);
+  background: var(--pink);
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: .02em;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+h1::before, h1::after{
+  content: "✦";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: .85;
+  font-size: 18px;
+}
+h1::before{ left: 16px; }
+h1::after{ right: 16px; }
+
+h2{
+  margin: 22px 0 10px;
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: var(--r-pill);
+  background: var(--teal);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+  box-shadow: 0 6px 0 rgba(0,0,0,.12);
+}
+h3{
+  margin: 0 0 10px;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+/* 説明文（indexの最初のp）：枠なし・太め・読みやすく */
+body > p:first-of-type{
+  font-weight: 700;
+  color: rgba(27,27,27,.90);
+  line-height: 1.9;
+  margin-top: 18px;
+  margin-bottom: 22px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* その他p */
+p{
+  margin: 0 0 16px;
+  color: rgba(27,27,27,.92);
+}
+
+/* 画像 */
+img{
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-soft);
+  border: 2px solid rgba(255,255,255,.65);
+}
+
+/* ----------------------------
+  4) Controls / panels
+---------------------------- */
+#severity-control,
+#design-control,
+#uno,
+#handArea,
+#cpuArea{
+  background: var(--cream);
+  border-radius: var(--r-xl);
+  border: 2px solid rgba(0,0,0,.10);
+  box-shadow: 0 10px 0 rgba(0,0,0,.10);
+}
+
+#severity-control{ padding: 18px; }
+#design-control{ padding: 18px; }
+#uno{
+  padding: 22px;
+  margin-top: 22px;
+}
+#handArea, #cpuArea{ padding: 16px; }
+
+#uno .description{
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+/* フォーカス可視化 */
+:focus-visible{
+  outline: 3px solid rgba(57,174,182,.45);
+  outline-offset: 3px;
+}
+
+/* slider / select */
+#severity-row{
+  gap: 12px;
+  flex-wrap: wrap;
+}
+#severity-title{ font-weight: 900; }
+#severity{
+  width: min(360px, 80vw);
+  accent-color: var(--pink);
+}
+.severity-ticks{
+  width: min(360px, 80vw);
+  color: var(--muted);
+}
+select{
+  border: 2px solid rgba(0,0,0,.14);
+  background: #fff;
+  border-radius: var(--r-pill);
+  padding: 10px 14px;
+  font-weight: 800;
+}
+label{ font-weight: 900; }
+
+/* ----------------------------
+  5) Buttons
+---------------------------- */
+button{
+  border: 2px solid rgba(0,0,0,.18);
+  background: #fff;
+  color: var(--text);
+  border-radius: var(--r-pill);
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 0 rgba(0,0,0,.12);
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+button:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 8px 0 rgba(0,0,0,.12);
+  background: #fffdfb;
+}
+button:active{
+  transform: translateY(1px);
+  box-shadow: 0 3px 0 rgba(0,0,0,.12);
+}
+
+/* UNO開始ボタン（index） */
+.start-btn{
+  display: block;
+  width: var(--col);
+  padding: 14px 18px;
+  margin-top: 24px;
+  margin-bottom: 40px;
+
+  background: var(--teal);
+  color: #fff;
+  border-color: rgba(0,0,0,.10);
+  font-size: 15px;
+}
+.start-btn:hover{ background: var(--teal-deep); }
+
+/* 戻るボタン */
+button[onclick*="index.html"]{
+  margin: 22px auto 40px;
+  display: inline-block;
+}
+
+/* ----------------------------
+  6) Home slider (hero)
+---------------------------- */
+.hero{
+  position: relative;
+  width: var(--col);
+  margin: 22px auto 26px;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  background: #fff;
+}
+
+.hero-slide{
+  width: 100%;
+  height: auto;
+  display: none;
+}
+.hero-slide.is-active{ display: block; }
+
+.hero-btn{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: var(--r-pill);
+  padding: 10px 12px;
+  background: rgba(255,255,255,.92);
+}
+.hero-btn.prev{ left: 10px; }
+.hero-btn.next{ right: 10px; }
+
+/* ----------------------------
+  7) UNO layout
+---------------------------- */
+#table{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 12px;
+}
+@media (min-width: 860px){
+  #table{ grid-template-columns: 1fr 1fr; }
+}
+
+/* discard / deckの中は白い面 */
+#discardArea, #deckArea{
+  padding: 16px;
+  background: #fff;
+  border-radius: var(--r-xl);
+  border: 2px solid rgba(0,0,0,.10);
+  box-shadow: 0 10px 0 rgba(0,0,0,.10);
+}
+
+#discard{
+  display: grid;
+  place-items: center;
+  width: 120px;
+  height: 160px;
+  margin-top: 8px;
+}
+
+/* メッセージ：吹き出し */
+#message{
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: var(--r-xl);
+  background: rgba(57,174,182,.12);
+  border: 2px solid rgba(57,174,182,.22);
+  color: rgba(27,27,27,.9);
+  min-height: 1.2em;
+}
+
+/* 手札の並び */
+#hand{ gap: 10px; }
+
+/* ----------------------------
+  8) UNO cards (frame only)
+---------------------------- */
+.card{
+  width: 86px;
+  height: 128px;
+  border-radius: 18px;
+  border: 2px solid rgba(255,255,255,.55);
+  box-shadow: 0 10px 0 rgba(0,0,0,.12);
+  background-color: #fff;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 0 rgba(0,0,0,.12);
+}
+
+/* 出せないカード：わかりにくさ体験のため“見た目差なし” */
+.card.unplayable{
+  outline: none;
+}
+
+/* ----------------------------
+  9) Filter flicker fix (Safari)
+---------------------------- */
+#filtered{
+  transform: translateZ(0);
+  will-change: filter;
+  backface-visibility: hidden;
+  isolation: isolate;
+  contain: paint;
+}
+
+/* フィルタONの時だけカードの動きを止めてちらつき防止 */
+body.protan-light .card,
+body.protan-mid .card,
+body.protan-strong .card,
+body.deutan-light .card,
+body.deutan-mid .card,
+body.deutan-strong .card,
+body.tritan-light .card,
+body.tritan-mid .card,
+body.tritan-strong .card{
+  transition: none !important;
+}
+body.protan-light .card:hover,
+body.protan-mid .card:hover,
+body.protan-strong .card:hover,
+body.deutan-light .card:hover,
+body.deutan-mid .card:hover,
+body.deutan-strong .card:hover,
+body.tritan-light .card:hover,
+body.tritan-mid .card:hover,
+body.tritan-strong .card:hover{
+  transform: none !important;
+}
+
+/* （任意）フィルタON中の“押せる感”（欲しければ残す） */
+body.protan-light #hand .card:not(.unplayable),
+body.protan-mid   #hand .card:not(.unplayable),
+body.protan-strong#hand .card:not(.unplayable),
+body.deutan-light #hand .card:not(.unplayable),
+body.deutan-mid   #hand .card:not(.unplayable),
+body.deutan-strong#hand .card:not(.unplayable),
+body.tritan-light #hand .card:not(.unplayable),
+body.tritan-mid   #hand .card:not(.unplayable),
+body.tritan-strong#hand .card:not(.unplayable){
+  cursor: pointer;
+  outline: 2px solid rgba(0,0,0,.18);
+  outline-offset: 2px;
+}
+body.protan-light #hand .card:not(.unplayable):active,
+body.protan-mid   #hand .card:not(.unplayable):active,
+body.protan-strong#hand .card:not(.unplayable):active,
+body.deutan-light #hand .card:not(.unplayable):active,
+body.deutan-mid   #hand .card:not(.unplayable):active,
+body.deutan-strong#hand .card:not(.unplayable):active,
+body.tritan-light #hand .card:not(.unplayable):active,
+body.tritan-mid   #hand .card:not(.unplayable):active,
+body.tritan-strong#hand .card:not(.unplayable):active{
+  filter: brightness(0.98);
+}
+/* =========================
+  ✅ そろえる用の“箱”
+========================= */
+.page{
+  max-width: var(--max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+/* タイトルの帯は箱の幅いっぱいに */
+.page h1{
+  width: 100%;
+  margin: 28px 0 14px;
+  padding: 14px 24px;  /* ← タイトル文字の開始位置 */
+}
+
+/* 本文（説明文）もタイトル文字の開始位置に合わせる */
+.page .lead{
+  margin: 0 0 16px;
+  padding-left: 24px;  /* ← h1の左右paddingと合わせる */
+  padding-right: 24px;
+  text-align: left;
+  font-weight: 700;
+}
+
+/* スライダーと開始ボタンも箱の幅に合わせる */
+.page .hero,
+.page .start-btn{
+  width: 100%;
+}
+/* =========================
+  余白（スペース）を増やす
+========================= */
+
+/* ページ上下の余白（全体の空気感） */
+.page{
+  padding-top: 24px;
+  padding-bottom: 48px;
+}
+
+/* タイトルの上下を広げる */
+.page h1{
+  margin-bottom: 20px;
+}
+
+/* 本文（説明文）の下に余白 */
+.page .lead{
+  margin-bottom: 20px;
+  line-height: 1.0; /* 行間も少し広げて読みやすく */
+}
+
+/* スライダー（hero）の上下を広げる */
+.page .hero{
+  margin-top: 18px;
+  margin-bottom: 26px;
+}
+
+/* フィルタUIブロック同士の間隔（ボタンの塊、スライダーなど） */
+.page #severity-control,
+.page #design-control{
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+/* UNO開始ボタンの上下（最後を気持ちよく） */
+.page .start-btn{
+  margin-top: 26px;
+  margin-bottom: 10px;
+}
+/* =========================
+  タイトル周りの余白調整
+  - タイトルと本文の間を広げる
+  - グリッド(ひし形)と被りにくくする
+========================= */
+
+/* タイトル（h1）を少し下に下げて、下の余白も増やす */
+.page h1{
+  margin-top: 36px;     /* ← 上の空白を増やす（被り対策） */
+  margin-bottom: 34px;  /* ← タイトルと本文の間隔 */
+}
+
+/* 本文（説明文）も少し下に余白 */
+.page .lead{
+  margin-top: 0;
+  margin-bottom: 26px;  /* ← 本文の下（次の要素との間） */
+}
+
+/* もし「ひし形がタイトルに刺さる」見え方が強い場合の保険：
+   タイトル帯に薄い“縁”をつけて背景から浮かせる */
+.page h1{
+  border: 2px solid rgba(255,255,255,.55);
+}
+.page h1::before,
+.page h1::after{
+  display: none;
+}
+/* =========================
+  説明文（.lead）に白い枠をつける
+========================= */
+
+.page .lead{
+  background: rgba(255,255,255,.92);   /* 白（少しだけ透け） */
+  border: 2px solid rgba(255,255,255,.85);
+  border-radius: 18px;
+  padding: 16px 18px;
+  box-shadow: 0 10px 0 rgba(0,0,0,.10);
+
+  /* 位置と幅（タイトル列に合わせる） */
+  width: min(980px, 100%);
+  margin: 18px auto 26px;
+
+  /* 読みやすさ */
+  font-weight: 700;
+  line-height: 2.0;
+}
+/* 説明文カードを「タイトルの文字開始位置」に合わせて左揃え */
+.page .lead{
+  /* 中央寄せをやめる */
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  /* タイトルと同じ余白（h1のpadding）に合わせる */
+  padding-left: 18px;
+  padding-right: 18px;
+
+  /* 幅もタイトルと同じ列に */
+  width: 100% !important;
+  max-width: none !important;
+}
+/* タイトルと白い説明枠の間を広げる */
+.page h1{
+  margin-bottom: 40px; /* ←ここを増やすと間が広がる（例: 22〜40） */
+}
+
+.page .lead{
+  margin-top: 0; /* 念のため */
+}
+/* 白い説明枠 ↓ と 画像スライダー ↑ の間を狭める */
+.page .lead{
+  margin-bottom: 3px;   /* ←ここを小さくすると詰まる（例: 0〜14） */
+}
+
+.hero{
+  margin-top: 3px;      /* ←ここも小さく（例: 0〜14） */
+}
+/* スライダーと「UNOを始める」ボタンの間を広げる */
+#severity-control{
+  margin-bottom: 50px; /* ←ここを増やす（例: 24〜40） */
+}
+
+/* 念のため：ボタン上にも余白 */
+.start-btn{
+  margin-top: 0;       /* ここは基本0でOK */
+}
+button[onclick*="index.html"]{
+  display: block !important;
+  width: fit-content !important;
+  margin: 24px auto 40px !important;
+}
+/* 「あなたの手札」と「CPUの手札」の間を広げる */
+#cpuArea{
+  margin-top: 28px; /* まずは 28px くらいが自然 */
+}
+/* UNOセクション内：見出しと本文の左端を揃える */
+#uno{
+  --unoInset: 22px; /* ←この数字を変えると左の揃い位置が動く */
+}
+
+#uno > h2,
+#uno .description{
+  padding-left: var(--unoInset);
+  padding-right: var(--unoInset);
+}
+/* 見出しと本文の間隔を広げる */
+#uno > h2{
+  margin-bottom: 18px; /* まずは18pxおすすめ */
+}
+
+#uno .description{
+  margin-top: 0; /* 余計な上マージンがあれば消す */
+}
+.design-note{
+  white-space: normal;   /* ←HTMLの改行を“ただの空白”に戻す */
+}
+/* カードデザイン説明文：改行ルールを安定させる */
+#design-control .design-note{
+  white-space: normal !important; /* 改行を勝手に保持しない */
+  margin-top: 12px;
+  line-height: 1.9;
+}
+/* カードデザイン説明文：HTML内の改行を無視して、brだけ改行にする */
+#design-control .design-note{
+  white-space: normal !important;
+}
+/* select（カードデザイン）のフォントをサイトと統一 */
+#design-control select,
+#design-control option{
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+               "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  font-weight: 800; /* 本体の見た目を合わせたいなら */
+}
+/* ===== カスタムドロップダウン（カードデザイン） ===== */
+.design{
+  position: relative;
+}
+
+.design-head{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.design-label{
+  font-weight: 900;
+}
+
+.design-btn{
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+               "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  font-weight: 800;
+  padding: 10px 14px;
+  border-radius: 999px;
+}
+
+.design-caret{
+  margin-left: 8px;
+}
+
+.design-menu{
+  position: absolute;
+  top: 52px;
+  left: 0;
+  z-index: 50;
+  min-width: 220px;
+  background: rgba(255,255,255,.96);
+  border: 2px solid rgba(0,0,0,.12);
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.14);
+  padding: 8px;
+}
+
+.design-item{
+  width: 100%;
+  text-align: left;
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin: 2px 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+               "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  font-weight: 800;
+}
+
+.design-item:hover{
+  background: rgba(57,174,182,.14);
+}
+/* スマホ：手札を横スクロールできるように */
+#hand{
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+#hand .card{ flex: 0 0 auto; }

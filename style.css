@@ -1,0 +1,269 @@
+/* ============================
+   全体レイアウト
+============================ */
+
+body {
+  font-family: sans-serif;
+  padding: 40px;
+  background: #ffffff;
+  line-height: 1.6;
+  transition: filter 0.2s ease;
+}
+
+h1 {
+  margin-bottom: 16px;
+}
+
+p {
+  max-width: 600px;
+}
+
+/* ============================
+   ボタンデザイン
+============================ */
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 4px;
+  margin-bottom: 8px;
+  border: none;
+  border-radius: 6px;
+  background: #eee;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+  background: #ddd;
+  transform: translateY(-2px);
+}
+
+/* UNOを始めるボタン */
+.start-btn {
+  background: #4caf50;
+  color: #fff;
+  font-size: 18px;
+  margin-top: 16px;
+}
+.start-btn:hover {
+  background: #43a047;
+}
+
+/* ============================
+   説明画像
+============================ */
+
+img {
+  display: block;
+  margin: 16px 0;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ============================
+   フィルタ強さスライダー
+============================ */
+
+#severity-control {
+  margin-top: 16px;
+}
+
+#severity-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#severity-title {
+  white-space: nowrap;
+}
+
+#severity-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+#severity {
+  width: 220px;
+}
+
+.severity-ticks {
+  display: flex;
+  justify-content: space-between;
+  width: 220px;
+  font-size: 12px;
+  color: #555;
+  margin-top: 2px;
+}
+
+.severity-ticks span {
+  text-align: center;
+  flex: 1;
+}
+
+/* ============================
+   UNO（ゲーム画面用）
+============================ */
+
+/* ゲーム画面でも共通で使われるスタイル */
+
+#uno {
+  margin-top: 32px;
+}
+
+#uno h2 {
+  margin-bottom: 8px;
+  margin-top: 24px;
+}
+
+#uno .description {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 16px;
+}
+
+#table {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-start;
+  margin-top: 8px;
+}
+
+#discardArea, #deckArea {
+  min-width: 160px;
+}
+
+#discard {
+  width: 90px;
+  height: 130px;
+}
+
+#deckInfo {
+  margin-bottom: 8px;
+}
+
+#message {
+  margin-top: 8px;
+  min-height: 1.2em;
+  font-size: 14px;
+  color: #333;
+}
+
+#handArea {
+  margin-top: 24px;
+}
+
+#hand {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ============================
+   UNOカードの見た目（共通）
+============================ */
+
+.card {
+  width: 80px;
+  height: 120px;
+  border-radius: 10px;
+  padding: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  background: #fff;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  position: relative;
+  /* 色の見え方に影響しないよう、アニメーションは切っておく */
+  transition: none;
+}
+
+/* 出せないカード用クラスはつくけど、見た目は変えない */
+.card.unplayable {
+  /* 何もしない（透明度など変更なし） */
+}
+
+/* hover 時も見た目を変えない（色が変に見えないように） */
+.card:hover {
+  /* transform や box-shadow を変えない */
+}
+
+.card .corner {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.card .corner.bottom {
+  align-self: flex-end;
+  transform: rotate(180deg);
+}
+
+.card .center {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+/* ============================
+   カードテーマ（色配慮デザイン）
+============================ */
+
+/* theme-unfriendly = 色配慮なし UNO風 */
+body.theme-unfriendly .card[data-color="red"]    { background: #d7263d; color: #fff; }
+body.theme-unfriendly .card[data-color="yellow"] { background: #ffdf00; color: #000; }
+body.theme-unfriendly .card[data-color="green"]  { background: #008b3d; color: #fff; }
+body.theme-unfriendly .card[data-color="blue"]   { background: #0066cc; color: #fff; }
+body.theme-unfriendly .card[data-color="wild"]   { background: #000;    color: #fff; }
+
+/* theme-a = あなたの高コントラスト案に最適 */
+body.theme-a .card {
+  border: 3px solid #fff;
+}
+body.theme-a .card[data-color="red"]    { background: #b00020; color: #fff; }
+body.theme-a .card[data-color="yellow"] { background: #f9a825; color: #000; }
+body.theme-a .card[data-color="green"]  { background: #2e7d32; color: #fff; }
+body.theme-a .card[data-color="blue"]   { background: #1565c0; color: #fff; }
+body.theme-a .card[data-color="wild"]   { background: #424242; color: #fff; }
+
+/* theme-b = 模様で識別する案 */
+body.theme-b .card {
+  border: 2px solid #222;
+}
+body.theme-b .card[data-color="red"] {
+  background: repeating-linear-gradient(45deg,#ff8a80 0,#ff8a80 6px,#ff5252 6px,#ff5252 12px);
+  color: #000;
+}
+body.theme-b .card[data-color="yellow"] {
+  background: repeating-linear-gradient(45deg,#fff59d 0,#fff59d 6px,#ffeb3b 6px,#ffeb3b 12px);
+  color: #000;
+}
+body.theme-b .card[data-color="green"] {
+  background: repeating-linear-gradient(45deg,#a5d6a7 0,#a5d6a7 6px,#66bb6a 6px,#66bb6a 12px);
+  color: #000;
+}
+body.theme-b .card[data-color="blue"] {
+  background: repeating-linear-gradient(45deg,#90caf9 0,#90caf9 6px,#42a5f5 6px,#42a5f5 12px);
+  color: #000;
+}
+body.theme-b .card[data-color="wild"] {
+  background: #eee;
+  color: #000;
+}
+
+/* theme-c / d はプレースホルダ（自由に変えてOK） */
+
+body.theme-c .card[data-color="red"]    { background:#f8bbd0; color:#000; }
+body.theme-c .card[data-color="yellow"] { background:#fff9c4; color:#000; }
+body.theme-c .card[data-color="green"]  { background:#c8e6c9; color:#000; }
+body.theme-c .card[data-color="blue"]   { background:#bbdefb; color:#000; }
+body.theme-c .card[data-color="wild"]   { background:#eeeeee; color:#000; }
+
+body.theme-d .card[data-color="red"]    { background:#ef5350; color:#000; }
+body.theme-d .card[data-color="yellow"] { background:#ffca28; color:#000; }
+body.theme-d .card[data-color="green"]  { background:#66bb6a; color:#000; }
+body.theme-d .card[data-color="blue"]   { background:#42a5f5; color:#000; }
+body.theme-d .card[data-color="wild"]   { background:#8d6e63; color:#fff; }

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>色覚多様性UNO</title>
+
+  <!-- 共通CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- 色覚フィルタ用CSS（body.protan-light などのクラス定義） -->
+  <link rel="stylesheet" href="css/filter.css">
+
+  <link rel="stylesheet" href="css/exhibit.css">
+
+  <!-- 色覚フィルタの制御用JS（setFilter / setSeverity など） -->
+  <script src="js/filter.js" defer></script>
+
+  <script src="js/slider.js" defer></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+
+<body>
+
+  <!-- ★ 色覚シミュレーション用フィルタ（必須！） -->
+  <svg width="0" height="0">
+    <!-- 1型（プロタン） 軽度・中度・重度 -->
+    <filter id="protanLight">
+      <feColorMatrix type="matrix"
+        values="
+          0.7456858 0.3157749 -0.0614604 0 0
+          0.0343509 0.9358843  0.0297648 0 0
+         -0.0011646 -0.0144348 1.0155994 0 0
+          0        0         0         1 0" />
+    </filter>
+
+    <filter id="protanMid">
+      <feColorMatrix type="matrix"
+        values="
+          0.4913716 0.6315498 -0.1229208 0 0
+          0.0687018 0.8717686  0.0595296 0 0
+         -0.0023292 -0.0288696 1.0311988 0 0
+          0        0         0         1 0" />
+    </filter>
+
+    <filter id="protanStrong">
+      <feColorMatrix type="matrix"
+        values="
+          0.152286 1.052583 -0.204868 0 0
+          0.114503 0.786281  0.099216 0 0
+         -0.003882 -0.048116 1.051998 0 0
+          0        0        0        1 0" />
+    </filter>
+
+    <!-- 2型（デューテラン） 軽度・中度・重度 -->
+    <filter id="deutanLight">
+      <feColorMatrix type="matrix"
+        values="
+          0.8101966 0.2581938 -0.0683904 0 0
+          0.0840255 0.9017503  0.0142239 0 0
+         -0.003546  0.012882   0.9906643 0 0
+          0        0         0         1 0" />
+    </filter>
+
+    <filter id="deutanMid">
+      <feColorMatrix type="matrix"
+        values="
+          0.6203932 0.5163876 -0.1367808 0 0
+          0.168051  0.8035006  0.0284478 0 0
+         -0.007092  0.025764   0.9813286 0 0
+          0        0         0         1 0" />
+    </filter>
+
+    <filter id="deutanStrong">
+      <feColorMatrix type="matrix"
+        values="
+          0.367322 0.860646 -0.227968 0 0
+          0.280085 0.672501  0.047413 0 0
+         -0.01182  0.04294   0.968881 0 0
+          0        0        0        1 0" />
+    </filter>
+
+    <!-- 3型（トリタン） 軽度・中度・重度 -->
+    <filter id="tritanLight">
+      <feColorMatrix type="matrix"
+        values="
+          1.0766584 -0.0230247 -0.0536337 0 0
+         -0.0235233  0.9792427  0.0442806 0 0
+          0.0014199  0.2074101  0.79117   0 0
+          0         0         0         1 0" />
+    </filter>
+
+    <filter id="tritanMid">
+      <feColorMatrix type="matrix"
+        values="
+          1.1533168 -0.0460494 -0.1072674 0 0
+         -0.0470466  0.9584854  0.0885612 0 0
+          0.0028398  0.4148202  0.58234   0 0
+          0         0         0         1 0" />
+    </filter>
+
+    <filter id="tritanStrong">
+      <feColorMatrix type="matrix"
+        values="
+          1.255528 -0.076749 -0.178779 0 0
+         -0.078411  0.930809  0.147602 0 0
+          0.004733  0.691367  0.3039   0 0
+          0        0        0        1 0" />
+    </filter>
+ </svg>
+<!-- ★ SVGフィルタここまで -->
+
+<div class="page">
+  <h1>色覚多様性UNOへようこそ！</h1>
+
+  <p class="lead">
+    色覚多様性の見え方を体験しながら、UNOを遊べるウェブサイトです。<br>
+    まずは画像にフィルタをかけて見え方を確認してみましょう。
+  </p>
+
+  
+</div>
+
+  <!-- 説明用の画像-->
+<div class="hero" id="hero">
+
+  <!-- ★ここがフィルタ対象（画像だけ） -->
+  <div id="filtered">
+    <img class="hero-slide is-active" src="気味の悪い画像_page-0001.jpg" alt="スライド画像2">
+    <img class="hero-slide" src="色覚多様性に優しい社会にするために.png" alt="スライド画像1">
+  </div>
+
+  <!-- ★矢印ボタンはフィルタ対象外 -->
+  <button class="hero-btn prev" type="button" id="heroPrev">←</button>
+  <button class="hero-btn next" type="button" id="heroNext">→</button>
+
+</div>
+
+
+
+  <!-- フィルタ切り替えUI -->
+  <div>
+    <h2>色覚フィルタ切り替え</h2>
+
+    <button onclick="setFilter('none')">通常</button>
+    <button onclick="setFilter('protan')">1型</button>
+    <button onclick="setFilter('deutan')">2型</button>
+    <button onclick="setFilter('tritan')">3型</button>
+  </div>
+
+  <!-- 強さスライダー -->
+  <div id="severity-control">
+    <div id="severity-row">
+      <span id="severity-title">フィルタの強さ：</span>
+      <div id="severity-wrapper">
+        <input type="range" id="severity" min="1" max="3" value="3">
+        <div class="severity-ticks">
+          <span>軽度</span><span>中度</span><span>重度</span>
+        </div>
+      </div>
+      <span id="severity-label">重度</span>
+    </div>
+  </div>
+
+  <!-- UNOへ移動 -->
+  <button onclick="location.href='uno.html'" class="start-btn">
+    UNOを始める
+  </button>
+
+</body>
+</html>
+
+

@@ -1,0 +1,28 @@
+#filtered{
+  filter: none;
+  -webkit-filter: none;
+  transition: none; /* Safariちらつき対策でいったん切る */
+}
+
+/* ▼ 1型 */
+body.protan-light  #filtered { filter: url(#protanLight);  -webkit-filter: url(#protanLight); }
+body.protan-mid    #filtered { filter: url(#protanMid);    -webkit-filter: url(#protanMid); }
+body.protan-strong #filtered { filter: url(#protanStrong); -webkit-filter: url(#protanStrong); }
+
+/* ▼ 2型 */
+body.deutan-light  #filtered { filter: url(#deutanLight);  -webkit-filter: url(#deutanLight); }
+body.deutan-mid    #filtered { filter: url(#deutanMid);    -webkit-filter: url(#deutanMid); }
+body.deutan-strong #filtered { filter: url(#deutanStrong); -webkit-filter: url(#deutanStrong); }
+
+/* ▼ 3型 */
+body.tritan-light  #filtered { filter: url(#tritanLight);  -webkit-filter: url(#tritanLight); }
+body.tritan-mid    #filtered { filter: url(#tritanMid);    -webkit-filter: url(#tritanMid); }
+body.tritan-strong #filtered { filter: url(#tritanStrong); -webkit-filter: url(#tritanStrong); }
+
+/* テーマはそのまま */
+body.theme-unfriendly {}
+body.theme-a {}
+body.theme-b {}
+body.theme-c {}
+body.theme-d {}
+
