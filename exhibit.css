@@ -655,3 +655,44 @@ button[onclick*="index.html"]{
   -webkit-overflow-scrolling: touch;
 }
 #hand .card{ flex: 0 0 auto; }
+
+/* =========================
+   Mobile: フィルタ切替ボタンを崩さない
+========================= */
+.filter-switch {
+  margin-top: 18px;
+}
+
+.filter-buttons{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* スマホでは 4つのボタンを「4列」で固定して綺麗に並べる */
+@media (max-width: 520px){
+  .filter-switch h2{
+    display: inline-block;      /* 見出しは1行 */
+    margin-bottom: 10px;
+  }
+
+  .filter-buttons{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 通常/1型/2型/3型 を同じ幅で */
+    gap: 10px;
+  }
+
+  .filter-buttons button{
+    width: 100%;
+    padding: 10px 0;            /* 横がキツいので左右paddingを減らす */
+    font-size: 14px;
+    white-space: nowrap;        /* ボタン内で改行させない */
+  }
+}
+@media (max-width: 520px){
+  .page h1{
+    font-size: 34px;     /* 好みで 30〜36 */
+    line-height: 1.15;
+    padding: 18px 20px;
+  }
+}
