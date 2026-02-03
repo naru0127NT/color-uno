@@ -698,6 +698,7 @@ button[onclick*="index.html"]{
 }
 @media (max-width: 520px){
   h1{
+    .page h1 { outline: 6px solid red !important; }
     letter-spacing: 0 !important;
   }
 }
