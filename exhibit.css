@@ -706,9 +706,4 @@ button[onclick*="index.html"]{
     display: none;
   }
 }
-/* ✅デバッグ：これで変わらなかったらCSSが読まれてない */
-.page h1{
-  outline: 6px solid red !important;
-  background: #000 !important;
-  color: #fff !important;
-}
+
